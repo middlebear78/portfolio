@@ -83,3 +83,55 @@
         </div>
     </div>
 </section>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const contactForm = document.getElementById("contact-form");
+        const loadingDiv = document.querySelector(".loading");
+        const errorDiv = document.querySelector(".error-message");
+        const successDiv = document.querySelector(".sent-message");
+
+        contactForm.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            // Show loading
+            loadingDiv.classList.remove("d-none");
+            errorDiv.style.display = "none";
+            successDiv.classList.add("d-none");
+
+            try {
+                const formData = new FormData(this);
+                const response = await fetch(this.action, {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value,
+                    },
+                });
+
+                if (response.ok) {
+                    // Show success message
+                    loadingDiv.classList.add("d-none");
+                    successDiv.classList.remove("d-none");
+                    contactForm.reset();
+
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        successDiv.classList.add("d-none");
+                    }, 5000);
+                } else {
+                    throw new Error("Network response was not ok");
+                }
+            } catch (error) {
+                // Show error message
+                loadingDiv.classList.add("d-none");
+                errorDiv.style.display = "block";
+                errorDiv.textContent = "There was an error sending your message. Please try again.";
+
+                // Hide error message after 5 seconds
+                setTimeout(() => {
+                    errorDiv.style.display = "none";
+                }, 5000);
+            }
+        });
+    });
+</script>

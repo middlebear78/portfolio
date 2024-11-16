@@ -1718,41 +1718,86 @@ section,
     }
 }
 
-.contact-form .loading {
+/* Add these styles to your CSS file */
+.loading,
+.error-message,
+.sent-message {
+    margin: 15px 0;
+    padding: 15px 20px;
+    border-radius: 4px;
     display: none;
-    background: #fff;
-    text-align: center;
-    padding: 15px;
-    margin-bottom: 15px;
+    transition: all 0.3s ease;
 }
 
-.contact-form .error-message {
-    display: none;
-    color: #fff;
-    background: #df1529;
+.loading {
+    background: #f3f3f3;
     text-align: center;
-    padding: 15px;
-    margin-bottom: 15px;
 }
 
-.contact-form .sent-message {
-    display: none;
-    color: #fff;
-    background: #059652;
-    text-align: center;
-    padding: 15px;
-    margin-bottom: 15px;
+.error-message {
+    background: #fee8e8;
+    color: #f23838;
+    border: 1px solid #f23838;
 }
 
-.contact-form button[type="submit"] {
-    background: #0ea2bd;
+.sent-message {
+    background: #e8f8e8;
+    color: #28a745;
+    border: 1px solid #28a745;
+}
+
+.d-none {
+    display: none !important;
+}
+
+/* Show elements when they don't have d-none class */
+.loading:not(.d-none),
+.sent-message:not(.d-none) {
+    display: block;
+}
+
+/* Animation for messages */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.error-message:not(.d-none),
+.sent-message:not(.d-none) {
+    animation: fadeIn 0.3s ease forwards;
+}
+/* Add these styles to your CSS file */
+.contact .contact-form button[type="submit"] {
+    background: #0066cc; /* Changed to a stronger blue */
     border: 0;
-    padding: 10px 30px;
+    padding: 14px 45px;
     color: #fff;
     transition: 0.4s;
-    border-radius: 4px;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 16px;
 }
 
-.contact-form button[type="submit"]:hover {
-    background: #0c8da7;
+.contact .contact-form button[type="submit"]:hover {
+    background: #0077ee; /* Lighter blue on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 102, 204, 0.25);
+}
+
+/* Add a slight push effect when clicked */
+.contact .contact-form button[type="submit"]:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 102, 204, 0.25);
+}
+
+/* Disable state styling */
+.contact .contact-form button[type="submit"]:disabled {
+    background: #7fb2e6; /* Lighter blue for disabled state */
+    cursor: not-allowed;
 }

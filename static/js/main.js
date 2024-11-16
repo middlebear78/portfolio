@@ -306,41 +306,58 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
-const form = document.getElementById('contact-form');
+const form = document.getElementById("contact-form");
 
-form.addEventListener('submit', function (e) {
-    e.preventDefault();  // Prevent the default form submission
+form.addEventListener("submit", function (e) {
+    e.preventDefault(); // Prevent the default form submission
 
     const formData = new FormData(form);
 
-    fetch('/send-contact-email/', {
-        method: 'POST',
-        body: formData
+    fetch("/send-contact-email/", {
+        method: "POST",
+        body: formData,
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            // If success, display success message
-            showMessage(data.message, 'success');
-        } else {
-            // If error, display error message
-            showMessage(data.message, 'danger');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        showMessage('An unexpected error occurred.', 'danger');
-    });
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.success) {
+                // If success, display success message
+                showMessage(data.message, "success");
+            } else {
+                // If error, display error message
+                showMessage(data.message, "danger");
+            }
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            showMessage("An unexpected error occurred.", "danger");
+        });
 });
 
 // Show a message in the UI (you can modify this to fit your design)
 function showMessage(message, type) {
-    const alertContainer = document.querySelector('.alert-container');
-    const alertDiv = document.createElement('div');
-    alertDiv.classList.add('alert', `alert-${type}`);
+    const alertContainer = document.querySelector(".alert-container");
+    const alertDiv = document.createElement("div");
+    alertDiv.classList.add("alert", `alert-${type}`);
     alertDiv.textContent = message;
     alertContainer.appendChild(alertDiv);
 
     // Remove the alert after 5 seconds (optional)
     setTimeout(() => alertDiv.remove(), 5000);
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("name-search");
+    const portfolioItems = document.querySelectorAll(".portfolio-item");
+
+    searchInput.addEventListener("input", function (e) {
+        const searchTerm = e.target.value.toLowerCase();
+
+        portfolioItems.forEach((item) => {
+            const projectName = item.dataset.name;
+            const projectTags = item.dataset.tags;
+            const matchesSearch = projectName.includes(searchTerm) || projectTags.includes(searchTerm);
+
+            item.style.display = matchesSearch ? "block" : "none";
+        });
+    });
+});
