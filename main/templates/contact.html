@@ -44,6 +44,7 @@
                     class="contact-form"
                     data-aos="fade-up"
                     data-aos-delay="200"
+                    id="contact-form"
                 >
                     {% csrf_token %}
                     <div class="row gy-4">
@@ -77,93 +78,8 @@
                         </div>
                     </div>
                 </form>
+                <!-- Display Django Messages -->
             </div>
         </div>
     </div>
 </section>
-
-<style>
-    .contact-form .loading {
-        display: none;
-        background: #fff;
-        text-align: center;
-        padding: 15px;
-        margin-bottom: 15px;
-    }
-
-    .contact-form .error-message {
-        display: none;
-        color: #fff;
-        background: #df1529;
-        text-align: center;
-        padding: 15px;
-        margin-bottom: 15px;
-    }
-
-    .contact-form .sent-message {
-        display: none;
-        color: #fff;
-        background: #059652;
-        text-align: center;
-        padding: 15px;
-        margin-bottom: 15px;
-    }
-
-    .contact-form button[type="submit"] {
-        background: #0ea2bd;
-        border: 0;
-        padding: 10px 30px;
-        color: #fff;
-        transition: 0.4s;
-        border-radius: 4px;
-    }
-
-    .contact-form button[type="submit"]:hover {
-        background: #0c8da7;
-    }
-</style>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const form = document.querySelector(".contact-form");
-        const loadingDiv = form.querySelector(".loading");
-        const errorDiv = form.querySelector(".error-message");
-        const sentDiv = form.querySelector(".sent-message");
-
-        form.addEventListener("submit", async function (e) {
-            e.preventDefault();
-
-            // Show loading
-            loadingDiv.classList.remove("d-none");
-            errorDiv.style.display = "none";
-            sentDiv.classList.add("d-none");
-
-            try {
-                const formData = new FormData(form);
-                const response = await fetch(form.action, {
-                    method: "POST",
-                    body: formData,
-                    headers: {
-                        "X-CSRFToken": formData.get("csrfmiddlewaretoken"),
-                    },
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    // Success
-                    loadingDiv.classList.add("d-none");
-                    sentDiv.classList.remove("d-none");
-                    form.reset();
-                } else {
-                    // Error
-                    throw new Error(data.message || "Something went wrong");
-                }
-            } catch (error) {
-                loadingDiv.classList.add("d-none");
-                errorDiv.style.display = "block";
-                errorDiv.textContent = error.message;
-            }
-        });
-    });
-</script>

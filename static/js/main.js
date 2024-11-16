@@ -1,12 +1,4 @@
-/**
- * Template Name: MyResume
- * Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
- * Updated: Jun 29 2024 with Bootstrap v5.3.3
- * Author: BootstrapMade.com
- * License: https://bootstrapmade.com/license/
- */
-
-(function () {
+document.addEventListener("DOMContentLoaded", function () {
     "use strict";
 
     /**
@@ -229,12 +221,13 @@
 
     window.addEventListener("load", navmenuScrollspy);
     document.addEventListener("scroll", navmenuScrollspy);
-})();
 
-document.addEventListener("DOMContentLoaded", function () {
+    /**
+     * Filter Projects based on name search and tags
+     */
     const nameSearch = document.getElementById("name-search");
     const tags = document.querySelectorAll(".tag");
-    const projects = document.querySelectorAll(".portfolio-item"); // Corrected selector
+    const projects = document.querySelectorAll(".portfolio-item");
 
     function filterProjects() {
         const nameQuery = nameSearch.value.toLowerCase();
@@ -267,32 +260,87 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     nameSearch.addEventListener("keyup", filterProjects);
-});
 
-function filterProjects(filter) {
-    // Get all portfolio items
-    const projects = document.querySelectorAll(".portfolio-item");
+    /**
+     * Handle form submission
+     */
+    const form = document.querySelector(".contact-form");
+    const loadingDiv = form.querySelector(".loading");
+    const errorDiv = form.querySelector(".error-message");
+    const sentDiv = form.querySelector(".sent-message");
 
-    // Loop through the projects and toggle visibility
-    projects.forEach((project) => {
-        const tags = project.dataset.tags.split(",").map((tag) => tag.trim());
+    form.addEventListener("submit", async function (e) {
+        e.preventDefault();
 
-        if (filter === "*" || tags.includes(filter)) {
-            project.style.display = "block"; // Show matching projects
-        } else {
-            project.style.display = "none"; // Hide non-matching projects
+        // Show loading
+        loadingDiv.classList.remove("d-none");
+        errorDiv.style.display = "none";
+        sentDiv.classList.add("d-none"); // Make sure to hide sent message initially
+
+        try {
+            const formData = new FormData(form);
+            const response = await fetch(form.action, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "X-CSRFToken": formData.get("csrfmiddlewaretoken"),
+                },
+            });
+
+            const data = await response.json();
+            console.log(data); // Log the response to see what is returned
+
+            if (data.success) {
+                // Success: Hide loading and show success message
+                loadingDiv.classList.add("d-none");
+                sentDiv.classList.remove("d-none"); // Show the sent message
+                form.reset(); // Reset the form fields
+            } else {
+                // Error: Display error message
+                throw new Error(data.message || "Something went wrong");
+            }
+        } catch (error) {
+            loadingDiv.classList.add("d-none");
+            errorDiv.style.display = "block";
+            errorDiv.textContent = error.message;
         }
     });
+});
+const form = document.getElementById('contact-form');
 
-    // Update active class for the filter buttons
-    document.querySelectorAll(".portfolio-filters li").forEach((btn) => {
-        btn.classList.remove("filter-active");
+form.addEventListener('submit', function (e) {
+    e.preventDefault();  // Prevent the default form submission
+
+    const formData = new FormData(form);
+
+    fetch('/send-contact-email/', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // If success, display success message
+            showMessage(data.message, 'success');
+        } else {
+            // If error, display error message
+            showMessage(data.message, 'danger');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showMessage('An unexpected error occurred.', 'danger');
     });
-    document.querySelector(`[data-filter="${filter}"]`).classList.add("filter-active");
+});
+
+// Show a message in the UI (you can modify this to fit your design)
+function showMessage(message, type) {
+    const alertContainer = document.querySelector('.alert-container');
+    const alertDiv = document.createElement('div');
+    alertDiv.classList.add('alert', `alert-${type}`);
+    alertDiv.textContent = message;
+    alertContainer.appendChild(alertDiv);
+
+    // Remove the alert after 5 seconds (optional)
+    setTimeout(() => alertDiv.remove(), 5000);
 }
-
-
-
-
-
-

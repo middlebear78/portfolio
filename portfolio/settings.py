@@ -113,8 +113,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    BASE_DIR / 'static',  
 ]
+# In production, you typically collect static files into STATIC_ROOT
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Make sure Django can serve static files in development
+if DEBUG:
+    STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -130,7 +136,14 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
-CONTACT_EMAIL = os.environ.get('CONTACT_EMAIL')
+# Your Gmail email address (not the App Password)
+# EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD') # Your generated App Password (NOT your Google account password)
+# The "From" email address (use the same as EMAIL_HOST_USER)
+# DEFAULT_FROM_EMAIL = "urisos.environ.get('DEFAULT_FROM_EMAIL')
+# CONTACT_EMAIL = os.environ.get('CONTACT_EMAIL')
+# EMAIL_HOST_PASSWORD = "ynro tjes uals sxqc"
+EMAIL_HOST_USER = 'urisham@gmail.com'  # Your Gmail address
+EMAIL_HOST_PASSWORD = 'ynrotjesualssxqc'  # Your app password (not regular password)
+DEFAULT_FROM_EMAIL = 'urisham@gmail.com'  # Default sender email (same as EMAIL_HOST_USER)
+CONTACT_EMAIL = 'urisham@gmail.com'  # Optional, can be used for contact form emails
