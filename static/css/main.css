@@ -12,7 +12,8 @@
 --------------------------------------------------------------*/
 /* Fonts */
 :root {
-    --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+        "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --heading-font: "Raleway", sans-serif;
     --nav-font: "Poppins", sans-serif;
 }
@@ -245,7 +246,6 @@ h6 {
 }
 
 @media (min-width: 992px) {
-
     .navmenu a,
     .navmenu a:focus {
         max-width: 56px;
@@ -1110,8 +1110,8 @@ section,
     height: 100%;
 }
 
-.contact .php-email-form input[type=text],
-.contact .php-email-form input[type=email],
+.contact .php-email-form input[type="text"],
+.contact .php-email-form input[type="email"],
 .contact .php-email-form textarea {
     font-size: 14px;
     padding: 10px 15px;
@@ -1122,19 +1122,19 @@ section,
     border-color: color-mix(in srgb, var(--default-color), transparent 80%);
 }
 
-.contact .php-email-form input[type=text]:focus,
-.contact .php-email-form input[type=email]:focus,
+.contact .php-email-form input[type="text"]:focus,
+.contact .php-email-form input[type="email"]:focus,
 .contact .php-email-form textarea:focus {
     border-color: var(--accent-color);
 }
 
-.contact .php-email-form input[type=text]::placeholder,
-.contact .php-email-form input[type=email]::placeholder,
+.contact .php-email-form input[type="text"]::placeholder,
+.contact .php-email-form input[type="email"]::placeholder,
 .contact .php-email-form textarea::placeholder {
     color: color-mix(in srgb, var(--default-color), transparent 70%);
 }
 
-.contact .php-email-form button[type=submit] {
+.contact .php-email-form button[type="submit"] {
     color: var(--contrast-color);
     background: var(--accent-color);
     border: 0;
@@ -1143,7 +1143,7 @@ section,
     border-radius: 50px;
 }
 
-.contact .php-email-form button[type=submit]:hover {
+.contact .php-email-form button[type="submit"]:hover {
     background: color-mix(in srgb, var(--accent-color), transparent 25%);
 }
 
@@ -1184,7 +1184,6 @@ section,
 }
 
 @media (max-width: 575px) {
-
     .portfolio-details .swiper-button-prev,
     .portfolio-details .swiper-button-next {
         display: none;
@@ -1455,7 +1454,6 @@ section,
 # Starter Section Section
 --------------------------------------------------------------*/
 .starter-section {
-
 }
 
 /* Portfolio Search Bar */
@@ -1509,4 +1507,213 @@ section,
     max-width: 100%;
     max-height: 100%;
     object-fit: cover; /* Maintain aspect ratio and cover the area */
+}
+
+.portfolio-item {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Style the images */
+.portfolio-item img {
+    width: 100%;
+    height: 250px; /* Set your desired height */
+    object-fit: cover; /* Ensure images fill the area without distortion */
+    display: block;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .portfolio-item img {
+        height: 200px; /* Adjust for smaller screens */
+    }
+}
+
+/* Portfolio grid styling */
+.portfolio .portfolio-item {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 30px;
+    background: #fff;
+    /* Add transition for smooth filtering effect */
+    transition: all 0.3s ease-in-out;
+}
+
+.portfolio .portfolio-item img {
+    width: 100%;
+    height: 300px; /* Fixed height for all images */
+    object-fit: cover; /* This ensures images cover the area without distortion */
+    display: block;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect for images */
+.portfolio .portfolio-item:hover img {
+    transform: scale(1.1);
+}
+
+/* Portfolio info overlay styling */
+.portfolio .portfolio-info {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.portfolio .portfolio-info:hover {
+    opacity: 1;
+}
+
+/* Portfolio info text styling */
+.portfolio .portfolio-info h4 {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.portfolio .portfolio-info p {
+    color: #fff;
+    font-size: 14px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Link icons styling */
+.portfolio .portfolio-info .preview-link,
+.portfolio .portfolio-info .details-link {
+    color: #fff;
+    font-size: 24px;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+}
+
+.portfolio .portfolio-info .preview-link:hover,
+.portfolio .portfolio-info .details-link:hover {
+    color: #0ea2bd;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .portfolio .portfolio-item img {
+        height: 250px; /* Slightly smaller height for mobile devices */
+    }
+}
+
+.portfolio {
+    padding: 60px 0;
+}
+
+.portfolio-filters {
+    padding: 0;
+    margin: 0 0 40px 0;
+    list-style: none;
+    text-align: center;
+}
+
+.portfolio-filters li {
+    cursor: pointer;
+    display: inline-block;
+    padding: 8px 15px;
+    margin: 0 4px 8px 4px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1;
+    color: #444444;
+    transition: all 0.3s ease;
+    border-radius: 50px;
+    background: #f6f7f8;
+}
+
+.portfolio-filters li:hover,
+.portfolio-filters li.filter-active {
+    background: #16a085;
+    color: #fff;
+}
+
+/* Portfolio Items */
+.portfolio-item {
+    margin-bottom: 30px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: all 0.4s ease;
+}
+
+/* Search Bar */
+.search-bar {
+    margin-bottom: 30px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Portfolio Info Overlay */
+.portfolio-info {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.portfolio-item:hover .portfolio-info {
+    opacity: 1;
+}
+
+.portfolio-info h4 {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.portfolio-info p {
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+/* Icon Links */
+.portfolio-info .preview-link,
+.portfolio-info .details-link {
+    color: #fff;
+    font-size: 24px;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+}
+
+.portfolio-info .preview-link:hover,
+.portfolio-info .details-link:hover {
+    color: #16a085;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .portfolio-item img {
+        height: 250px;
+    }
 }
