@@ -1,73 +1,160 @@
 <section id="skills" class="skills section">
+  <!-- Section Title -->
+  <div class="container section-title" data-aos="fade-up">
+    <h2>Skills</h2>
+    <p>
+      Technologies and tools I'm mastering through John Bryce College and
+      personal development
+    </p>
+  </div>
 
-    <!-- Section Title -->
-    <div class="container section-title" data-aos="fade-up">
-        <h2>Skills</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-    </div><!-- End Section Title -->
-
-    <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row skills-content skills-animation">
-
-            <div class="col-lg-6">
-
-                <div class="progress">
-                    <span class="skill"><span>HTML</span> <i class="val">100%</i></span>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                    </div>
-                </div><!-- End Skills Item -->
-
-                <div class="progress">
-                    <span class="skill"><span>CSS</span> <i class="val">90%</i></span>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                    </div>
-                </div><!-- End Skills Item -->
-
-                <div class="progress">
-                    <span class="skill"><span>JavaScript</span> <i class="val">75%</i></span>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                    </div>
-                </div><!-- End Skills Item -->
-
-            </div>
-
-            <div class="col-lg-6">
-
-                <div class="progress">
-                    <span class="skill"><span>PHP</span> <i class="val">80%</i></span>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                    </div>
-                </div><!-- End Skills Item -->
-
-                <div class="progress">
-                    <span class="skill"><span>WordPress/CMS</span> <i class="val">90%</i></span>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                    </div>
-                </div><!-- End Skills Item -->
-
-                <div class="progress">
-                    <span class="skill"><span>Photoshop</span> <i class="val">55%</i></span>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                    </div>
-                </div><!-- End Skills Item -->
-
-            </div>
-
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="skills-wrapper">
+      <!-- Frontend -->
+      <div class="skill-section">
+        <div class="skill-header">
+          <span class="skill-icon">
+            <i class="bi bi-window-fullscreen" style="color: #ff6b6b"></i>
+          </span>
+          <h3>Frontend</h3>
         </div>
+        <ul class="skill-list">
+          <li>JavaScript</li>
+          <li>TypeScript</li>
+          <li>React</li>
+          <li>React + TS</li>
+          <li>React-native</li>
+          <li>HTML5</li>
+          <li>CSS3</li>
+        </ul>
+      </div>
 
+      <!-- Backend -->
+      <div class="skill-section">
+        <div class="skill-header">
+          <span class="skill-icon">
+            <i class="bi bi-database" style="color: #4d96ff"></i>
+          </span>
+          <h3>Backend</h3>
+        </div>
+        <ul class="skill-list">
+          <li>Python</li>
+          <li>Django</li>
+          <li>Flask</li>
+          <li>Node.js</li>
+          <li>Node + TS</li>
+          <li>MySQL</li>
+          <li>MongoDB</li>
+        </ul>
+      </div>
+
+      <!-- Tools & Cloud -->
+      <div class="skill-section">
+        <div class="skill-header">
+          <span class="skill-icon">
+            <i class="bi bi-tools" style="color: #6c63ff"></i>
+          </span>
+          <h3>Tools & Cloud</h3>
+        </div>
+        <ul class="skill-list">
+          <!-- <li>Git</li> -->
+          <li>GitHub</li>
+          <li>Docker</li>
+          <li>Firebase</li>
+          <li>Cloudinary</li>
+          <li>Postman</li>
+        </ul>
+      </div>
     </div>
+  </div>
 
-</section><!-- /Skills Section -->
+  <style>
+    .skills-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .skill-section {
+      flex: 1;
+      min-width: 280px;
+      max-width: 380px;
+      border-left: 4px solid #4e6bff;
+      padding: 0 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .skill-section:hover {
+      border-left-width: 8px;
+    }
+
+    .skill-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .skill-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .skill-icon i {
+      font-size: 1.8rem;
+    }
+
+    .skill-header h3 {
+      font-size: 1.4rem;
+      margin: 0;
+      font-weight: 600;
+      color: #2d2d2d;
+    }
+
+    .skill-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .skill-list li {
+      font-size: 0.95rem;
+      color: #4a4a4a;
+      position: relative;
+      transition: all 0.3s ease;
+      cursor: default;
+      padding-left: 1rem;
+    }
+
+    .skill-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #4e6bff;
+    }
+
+    .skill-list li:hover {
+      color: #4e6bff;
+      transform: translateX(5px);
+    }
+
+    @media (max-width: 768px) {
+      .skills-wrapper {
+        gap: 3rem;
+      }
+
+      .skill-section {
+        min-width: 100%;
+        border-left-width: 3px;
+      }
+    }
+  </style>
+</section>
