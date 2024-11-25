@@ -60,15 +60,14 @@
                         </div>
 
                         <div class="portfolio-links">
-                            {% if project.random_image %}
                             <a
-                                href="{{ project.random_image.image.url }}"
+                                href="{{ project.github_url }}"
+                                target="_blank"
                                 title="View Project on GitHub"
                                 class="preview-link"
                             >
                                 <i class="bi bi-github"></i>
                             </a>
-                            {% endif %}
                             <a href="{% url 'project' project.id %}" title="View Project Details" class="details-link">
                                 <i class="bi bi-link-45deg"></i>
                             </a>

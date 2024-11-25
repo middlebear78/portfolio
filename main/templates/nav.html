@@ -2,11 +2,20 @@
 
 <nav id="navmenu" class="navmenu">
     <ul>
-        <li><a href="#hero" class="active"><i class="bi bi-house navicon"></i><span>Home</span></a></li>
-        <li><a href="#about"><i class="bi bi-person navicon"></i><span>About</span></a></li>
-        <li><a href="#portfolio"><i class="bi bi-images navicon"></i><span>Portfolio</span></a></li>
-        <li><a href="#skills"><i class="bi bi-keyboard navicon"></i><span>Skills</span></a></li>
-        <!-- <li><a href="#resume"><i class="bi bi-file-earmark-text navicon"></i><span>Resume</span></a></li> -->
-        <li><a href="#contact"><i class="bi bi-envelope navicon"></i><span>Contact</span></a></li>
+        {% if request.path == '/' %}
+            <!-- If we're on the home page, use anchor links -->
+            <li><a href="#hero" class="active"><i class="bi bi-house navicon"></i><span>Home</span></a></li>
+            <li><a href="#about"><i class="bi bi-person navicon"></i><span>About</span></a></li>
+            <li><a href="#portfolio"><i class="bi bi-images navicon"></i><span>Portfolio</span></a></li>
+            <li><a href="#skills"><i class="bi bi-keyboard navicon"></i><span>Skills</span></a></li>
+            <li><a href="#contact"><i class="bi bi-envelope navicon"></i><span>Contact</span></a></li>
+        {% else %}
+            <!-- If we're on any other page, use full URLs -->
+            <li><a href="{% url 'home' %}#hero"><i class="bi bi-house navicon"></i><span>Home</span></a></li>
+            <li><a href="{% url 'home' %}#about"><i class="bi bi-person navicon"></i><span>About</span></a></li>
+            <li><a href="{% url 'home' %}#portfolio"><i class="bi bi-images navicon"></i><span>Portfolio</span></a></li>
+            <li><a href="{% url 'home' %}#skills"><i class="bi bi-keyboard navicon"></i><span>Skills</span></a></li>
+            <li><a href="{% url 'home' %}#contact"><i class="bi bi-envelope navicon"></i><span>Contact</span></a></li>
+        {% endif %}
     </ul>
 </nav>
