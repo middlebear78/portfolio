@@ -2,8 +2,6 @@ import random
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.conf import settings
-
-from .forms import ContactForm
 from .models import Project, Tag
 from django.core.mail import send_mail
 from django.shortcuts import render

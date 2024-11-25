@@ -15,7 +15,8 @@ try:
     server = smtplib.SMTP(smtp_server, smtp_port)
     server.starttls()  # Secure the connection
     server.login(smtp_user, smtp_password)  # Login with the App Password
-    server.sendmail(smtp_user, 'recipient@example.com', msg.as_string())  # Send email
+    server.sendmail(smtp_user, 'recipient@example.com',
+                    msg.as_string())  # Send email
     print("Email sent successfully!")
 except Exception as e:
     print(f"Error: {e}")
