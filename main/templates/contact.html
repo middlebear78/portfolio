@@ -1,137 +1,160 @@
 {% load static %}
 <section id="contact" class="contact section">
-    <div class="container section-title" data-aos="fade-up">
-        <h2>Contact Me</h2>
-        <p>
-            I'd love to hear from you! Whether you have a project inquiry, a collaboration opportunity, or just want to
-            connect, feel free to reach out.
-        </p>
-    </div>
+  <div class="container section-title" data-aos="fade-up">
+    <h2>Contact Me</h2>
+    <p>
+      I'd love to hear from you! Whether you are looking to hire, have a project
+      inquiry, a collaboration opportunity, or just want to connect, feel free
+      to reach out.
+    </p>
+  </div>
 
-    <div class="container" data-aos="fade" data-aos-delay="100">
-        <div class="row gy-4">
-            <div class="col-lg-4">
-                <!-- Contact Information Section -->
-                <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
-                    <i class="bi bi-geo-alt flex-shrink-0"></i>
-                    <div>
-                        <h3>Address</h3>
-                        <p>tel-aviv, Israel</p>
-                    </div>
-                </div>
-
-                <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
-                    <i class="bi bi-telephone flex-shrink-0"></i>
-                    <div>
-                        <h3>Call me</h3>
-                        <p>+972 54 9848622</p>
-                    </div>
-                </div>
-
-                <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
-                    <i class="bi bi-envelope flex-shrink-0"></i>
-                    <div>
-                        <h3>Email Me</h3>
-                        <p>urisham@gmail.com</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-8">
-                <form
-                    method="post"
-                    action="{% url 'contact' %}"
-                    class="contact-form"
-                    data-aos="fade-up"
-                    data-aos-delay="200"
-                    id="contact-form"
-                >
-                    {% csrf_token %}
-                    <div class="row gy-4">
-                        <div class="col-md-6">
-                            <input type="text" name="name" class="form-control" placeholder="Your Name" required />
-                        </div>
-
-                        <div class="col-md-6">
-                            <input type="email" class="form-control" name="email" placeholder="Your Email" required />
-                        </div>
-
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" name="subject" placeholder="Subject" required />
-                        </div>
-
-                        <div class="col-md-12">
-                            <textarea
-                                class="form-control"
-                                name="message"
-                                rows="6"
-                                placeholder="Message"
-                                required
-                            ></textarea>
-                        </div>
-
-                        <div class="col-md-12 text-center">
-                            <div class="loading d-none">Loading</div>
-                            <div class="error-message"></div>
-                            <div class="sent-message d-none">Your message has been sent. Thank you!</div>
-                            <button type="submit">Send Message</button>
-                        </div>
-                    </div>
-                </form>
-                <!-- Display Django Messages -->
-            </div>
+  <div class="container" data-aos="fade" data-aos-delay="100">
+    <div class="row gy-4">
+      <div class="col-lg-4">
+        <!-- Contact Information Section -->
+        <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
+          <i class="bi bi-geo-alt flex-shrink-0"></i>
+          <div>
+            <h3>Address</h3>
+            <p>tel-aviv, Israel</p>
+          </div>
         </div>
+
+        <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
+          <i class="bi bi-telephone flex-shrink-0"></i>
+          <div>
+            <h3>Call me</h3>
+            <p>+972 54 9848622</p>
+          </div>
+        </div>
+
+        <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
+          <i class="bi bi-envelope flex-shrink-0"></i>
+          <div>
+            <h3>Email Me</h3>
+            <p>urisham@gmail.com</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-8">
+        <form
+          method="post"
+          action="{% url 'contact' %}"
+          class="contact-form"
+          data-aos="fade-up"
+          data-aos-delay="200"
+          id="contact-form"
+        >
+          {% csrf_token %}
+          <div class="row gy-4">
+            <div class="col-md-6">
+              <input
+                type="text"
+                name="name"
+                class="form-control"
+                placeholder="Your Name"
+                required
+              />
+            </div>
+
+            <div class="col-md-6">
+              <input
+                type="email"
+                class="form-control"
+                name="email"
+                placeholder="Your Email"
+                required
+              />
+            </div>
+
+            <div class="col-md-12">
+              <input
+                type="text"
+                class="form-control"
+                name="subject"
+                placeholder="Subject"
+                required
+              />
+            </div>
+
+            <div class="col-md-12">
+              <textarea
+                class="form-control"
+                name="message"
+                rows="6"
+                placeholder="Message"
+                required
+              ></textarea>
+            </div>
+
+            <div class="col-md-12 text-center">
+              <div class="loading d-none">Loading</div>
+              <div class="error-message"></div>
+              <div class="sent-message d-none">
+                Your message has been sent. Thank you!
+              </div>
+              <button type="submit">Send Message</button>
+            </div>
+          </div>
+        </form>
+        <!-- Display Django Messages -->
+      </div>
     </div>
+  </div>
 </section>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const contactForm = document.getElementById("contact-form");
-        const loadingDiv = document.querySelector(".loading");
-        const errorDiv = document.querySelector(".error-message");
-        const successDiv = document.querySelector(".sent-message");
+  document.addEventListener("DOMContentLoaded", function () {
+    const contactForm = document.getElementById("contact-form");
+    const loadingDiv = document.querySelector(".loading");
+    const errorDiv = document.querySelector(".error-message");
+    const successDiv = document.querySelector(".sent-message");
 
-        contactForm.addEventListener("submit", async function (e) {
-            e.preventDefault();
+    contactForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
 
-            // Show loading
-            loadingDiv.classList.remove("d-none");
-            errorDiv.style.display = "none";
-            successDiv.classList.add("d-none");
+      // Show loading
+      loadingDiv.classList.remove("d-none");
+      errorDiv.style.display = "none";
+      successDiv.classList.add("d-none");
 
-            try {
-                const formData = new FormData(this);
-                const response = await fetch(this.action, {
-                    method: "POST",
-                    body: formData,
-                    headers: {
-                        "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value,
-                    },
-                });
-
-                if (response.ok) {
-                    // Show success message
-                    loadingDiv.classList.add("d-none");
-                    successDiv.classList.remove("d-none");
-                    contactForm.reset();
-
-                    // Hide success message after 5 seconds
-                    setTimeout(() => {
-                        successDiv.classList.add("d-none");
-                    }, 5000);
-                } else {
-                    throw new Error("Network response was not ok");
-                }
-            } catch (error) {
-                // Show error message
-                loadingDiv.classList.add("d-none");
-                errorDiv.style.display = "block";
-                errorDiv.textContent = "There was an error sending your message. Please try again.";
-
-                // Hide error message after 5 seconds
-                setTimeout(() => {
-                    errorDiv.style.display = "none";
-                }, 5000);
-            }
+      try {
+        const formData = new FormData(this);
+        const response = await fetch(this.action, {
+          method: "POST",
+          body: formData,
+          headers: {
+            "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]")
+              .value,
+          },
         });
+
+        if (response.ok) {
+          // Show success message
+          loadingDiv.classList.add("d-none");
+          successDiv.classList.remove("d-none");
+          contactForm.reset();
+
+          // Hide success message after 5 seconds
+          setTimeout(() => {
+            successDiv.classList.add("d-none");
+          }, 5000);
+        } else {
+          throw new Error("Network response was not ok");
+        }
+      } catch (error) {
+        // Show error message
+        loadingDiv.classList.add("d-none");
+        errorDiv.style.display = "block";
+        errorDiv.textContent =
+          "There was an error sending your message. Please try again.";
+
+        // Hide error message after 5 seconds
+        setTimeout(() => {
+          errorDiv.style.display = "none";
+        }, 5000);
+      }
     });
+  });
 </script>
