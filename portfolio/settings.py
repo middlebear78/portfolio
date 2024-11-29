@@ -28,7 +28,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['urisham.pythonanywhere.com']
 
 # Application definition
 
@@ -118,7 +118,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',  
 ]
 # In production, you typically collect static files into STATIC_ROOT
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Make sure Django can serve static files in development
 if DEBUG:
