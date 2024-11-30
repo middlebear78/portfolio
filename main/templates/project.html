@@ -1,51 +1,30 @@
-{% extends 'index.html' %}
-{% load static %}
-{% block title %}Project{% endblock title %}
-
+{% extends 'index.html' %} 
+{% load static %} 
+{% block title %}Portfolio Details{% endblock title %}
 {% block body_class %}portfolio-details-page{% endblock %}
-
 {% block content %}
+
 <!-- Page Title -->
-<div class="page-title" data-aos="fade" style="padding: 15px 0;">
+<div class="page-title" data-aos="fade">
     <div class="container">
         <nav class="breadcrumbs">
             <ol>
                 <li><a href="{% url 'home' %}">Home</a></li>
-                <li class="current">Project Details</li>
+                <li class="current">Portfolio Details</li>
             </ol>
         </nav>
-        <h1>Project Details</h1>
+        <h1>Portfolio Details</h1>
     </div>
 </div>
 
 <!-- Portfolio Details Section -->
-<section id="portfolio-details" class="portfolio-details section" style="padding-top: 0;">
+<section id="portfolio-details" class="portfolio-details">
     <div class="container" data-aos="fade-up">
-        <!-- Slider Section -->
-        <div class="portfolio-details-slider swiper init-swiper" style="margin-top: -30px; margin-bottom: 0;">
-            <script type="application/json" class="swiper-config">
-                {
-                    "loop": true,
-                    "speed": 600,
-                    "autoplay": {
-                        "delay": 5000
-                    },
-                    "slidesPerView": "auto",
-                    "navigation": {
-                        "nextEl": ".swiper-button-next",
-                        "prevEl": ".swiper-button-prev"
-                    },
-                    "pagination": {
-                        "el": ".swiper-pagination",
-                        "type": "bullets",
-                        "clickable": true
-                    }
-                }
-            </script>
+        <div class="portfolio-details-slider swiper">
             <div class="swiper-wrapper align-items-center">
                 {% for image in project.images.all %}
                 <div class="swiper-slide">
-                    <img src="{{ image.image.url }}" alt="Project Image">
+                    <img src="{{ image.image.url }}" alt="">
                 </div>
                 {% endfor %}
             </div>
@@ -54,40 +33,33 @@
             <div class="swiper-pagination"></div>
         </div>
 
-        <!-- Content Section -->
-        <div class="container" style="margin-top: 0; padding-top: 0;">
-            <div class="row">
-                <!-- Project Description Column -->
-                <div class="col-md-8">
-                    <div class="portfolio-description">
-                        <h2>{{ project.title }}</h2>
-                        <p>{{ project.description }}</p>
-                    </div>
+        <div class="row justify-content-between gy-4">
+            <div class="col-lg-8">
+                <div class="portfolio-description">
+                    <h2>{{ project.title }}</h2>
+                    <p>{{ project.description }}</p>
                 </div>
-                
-                <!-- Project Information Column -->
-                <div class="col-md-4">
-                    <div class="portfolio-info">
-                        <h3>Project information</h3>
-                        <ul class="list-unstyled">
-                            <li><strong>Category</strong></li>
-                            <li><strong>Project Link</strong> <a href="{{ project.link }}">www.example.com</a></li>
-                            <li><a href="#" class="btn-visit">Visit Website</a></li>
-                        </ul>
-                    </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="portfolio-info">
+                    <h3>Project information</h3>
+                    <ul>
+                        <li>
+                            <strong>Category</strong>
+                            <div class="mt-2">
+                                {% for tag in project.tags.all %}
+                                <span class="badge bg-light-subtle text-secondary me-1 mb-1" style="font-size: 12px; padding: 6px 12px; border-radius: 20px; border: 1px solid #dee2e6;">{{ tag.name }}</span>
+                                {% endfor %}
+                            </div>
+                        </li>
+                        <li><strong>Project Link</strong> <a href="{{ project.link }}">www.example.com</a></li>
+                        <li><a href="#" class="btn-visit align-self-start">Visit Website</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 </section>
-{% endblock %}
 
-{% block extra_js %}
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        initHeader();
-        const swiperConfig = JSON.parse(document.querySelector('.swiper-config').textContent);
-        const swiper = new Swiper('.init-swiper', swiperConfig);
-    });
-</script>
-{% endblock extra_js %}
+{% endblock %}
