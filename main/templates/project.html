@@ -22,7 +22,7 @@
 <section id="portfolio-details" class="portfolio-details section" style="padding-top: 0;">
     <div class="container" data-aos="fade-up">
         <!-- Slider Section -->
-        <div class="portfolio-details-slider swiper init-swiper" style="margin-top: -30px;">
+        <div class="portfolio-details-slider swiper init-swiper" style="margin-top: -30px; margin-bottom: 0;">
             <script type="application/json" class="swiper-config">
                 {
                     "loop": true,
@@ -55,42 +55,19 @@
         </div>
 
         <!-- Content Section -->
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8 mx-auto">
-                    <div class="portfolio-description text-center">
+        <div class="container" style="margin-top: 0; padding-top: 0;">
+            <div class="row">
+                <!-- Project Description Column -->
+                <div class="col-md-8">
+                    <div class="portfolio-description">
                         <h2>{{ project.title }}</h2>
                         <p>{{ project.description }}</p>
-                        {% comment %} <p>
-                            Amet consequatur qui dolore veniam voluptatem voluptatem sit. Non aspernatur atque natus ut
-                            cum nam et. Praesentium error dolores rerum minus sequi quia veritatis eum.
-                        </p> {% endcomment %}
-
-                        {% comment %} <div class="testimonial-item">
-                            <p>
-                                <i class="bi bi-quote quote-icon-left"></i>
-                                <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</span>
-                                <i class="bi bi-quote quote-icon-right"></i>
-                            </p>
-                            <div>
-                                <img src="../assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                                <h3>Sara Wilsson</h3>
-                                <h4>Designer</h4>
-                            </div>
-                        </div> {% endcomment %}
-
-                        {% comment %} <p>
-                            Impedit ipsum quae et aliquid doloribus et voluptatem quasi. Perspiciatis occaecati earum et
-                            magnam animi. Quibusdam non qui ea vitae suscipit vitae sunt.
-                        </p> {% endcomment %}
-
-                        {% comment %} <p>
-                            Sunt voluptatum sapiente facilis quo odio aut ipsum repellat debitis. Molestiae et autem
-                            libero. Explicabo et quod necessitatibus similique quis dolor eum.
-                        </p> {% endcomment %}
                     </div>
-
-                    <div class="portfolio-info text-center mt-5">
+                </div>
+                
+                <!-- Project Information Column -->
+                <div class="col-md-4">
+                    <div class="portfolio-info">
                         <h3>Project information</h3>
                         <ul class="list-unstyled">
                             <li><strong>Category</strong></li>
