@@ -4,19 +4,12 @@
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
         <h2>Portfolio</h2>
-        <p>
-            Welcome to my portfolio. Explore my projects to see how my skills can contribute to your team.
-        </p>
+        <p>Welcome to my portfolio. Explore my projects to see how my skills can contribute to your team.</p>
     </div>
-    <!-- End Section Title -->
 
     <div class="container">
-        <div
-            class="isotope-layout"
-            data-default-filter="*"
-            data-layout="masonry"
-            data-sort="original-order"
-        >
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+            <!-- Portfolio Filters -->
             <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
                 <!-- Mobile Tags -->
                 <li data-filter="*" class="mobile-only filter-active">All</li>
@@ -38,6 +31,7 @@
                     flex-wrap: wrap;
                     gap: 12px;
                     justify-content: center;
+                    margin-bottom: 2rem;
                 }
 
                 .portfolio-filters li {
@@ -65,6 +59,31 @@
                     display: none !important;
                 }
 
+                /* Image container styles */
+                .image-container {
+                    width: 100%;
+                    height: 250px; /* Reduced height */
+                    overflow: hidden;
+                    position: relative;
+                }
+
+                .image-container img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+
+                /* Portfolio item spacing */
+                .portfolio-item {
+                    margin-bottom: 2rem; /* Added bottom margin */
+                    padding: 0 15px; /* Added horizontal padding */
+                }
+
+                /* Increased row gap */
+                .row.gy-4 {
+                    --bs-gutter-y: 2rem; /* Increased from default */
+                }
+
                 @media (max-width: 768px) {
                     .mobile-only {
                         display: inline-block !important;
@@ -79,50 +98,64 @@
                         padding: 6px 16px;
                         font-size: 0.9rem;
                     }
+                    .image-container {
+                        height: 200px; /* Smaller on mobile */
+                    }
+                    .portfolio-item {
+                        margin-bottom: 1.5rem; /* Slightly less margin on mobile */
+                    }
                 }
             </style>
-            <!-- End Portfolio Filters -->
 
             <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
                 {% for project in projects %}
-                <div
-                    class="col-lg-4 col-md-6 portfolio-item isotope-item {% for tag in project.tags.all %}filter-{{ tag.name|slugify }} {% endfor %}"
-                >
-                    {% if project.random_image %}
-                    <img src="{{ project.random_image.image.url }}" class="img-fluid" alt="" />
-                    {% else %}
-                    <img src="{% static 'assets/img/image-placeholder.png' %}" class="img-fluid" alt="" />
-                    {% endif %}
+                <div class="col-lg-4 col-md-6 portfolio-item isotope-item {% for tag in project.tags.all %}filter-{{ tag.name|slugify }} {% endfor %}">
+                    <div class="image-container">
+                        {% if project.random_image %}
+                        <img src="{{ project.random_image.image.url }}" alt="{{ project.title }}" />
+                        {% else %}
+                        <img src="{% static 'assets/img/image-placeholder.png' %}" alt="{{ project.title }}" />
+                        {% endif %}
+                    </div>
                     <div class="portfolio-info">
                         <h4>{{ project.title }}</h4>
                         {% if project.slogan %}
                         <p>{{project.slogan}}</p>
-                        {% endif %} {% if project.random_image %}
-                        <a
-                            href="{{ project.random_image.image.url }}"
-                            title="{{ project.title }}"
-                            data-gallery="portfolio-gallery-{{ project.tags.first.name|slugify }}"
-                            class="glightbox preview-link"
-                            ><i class="bi bi-zoom-in"></i
-                        ></a>
-                        {% else %}
-                        <a
-                            href="{% static 'img/masonry-portfolio/masonry-portfolio-1.jpg' %}"
-                            title="{{ project.title }}"
-                            data-gallery="portfolio-gallery-{{ project.tags.first.name|slugify }}"
-                            class="glightbox preview-link"
-                            ><i class="bi bi-zoom-in"></i
-                        ></a>
                         {% endif %}
-                        <a href="{% url 'project' project.id %}" title="More Details" class="details-link"
-                            ><i class="bi bi-link-45deg"></i
-                        ></a>
+                        
+                        <!-- Simplified gallery structure -->
+                        <a href="{{ project.random_image.image.url }}" 
+                           class="glightbox preview-link"
+                           data-type="image"
+                           data-effect="fade"
+                        ><i class="bi bi-zoom-in"></i></a>
+                        
+                        <div class="gallery-hidden">
+                            {% for image in project.projectimage_set.all %}
+                            <a href="{{ image.image.url }}"
+                               class="glightbox"
+                               data-type="image"
+                               data-effect="fade"
+                            ></a>
+                            {% endfor %}
+                        </div>
+
+                        <a href="{% url 'project' project.id %}" title="More Details" class="details-link">
+                            <i class="bi bi-link-45deg"></i>
+                        </a>
                     </div>
                 </div>
-                <!-- End Portfolio Item -->
                 {% endfor %}
             </div>
-            <!-- End Portfolio Container -->
         </div>
     </div>
 </section>
+
+<!-- Make sure this script is at the bottom of your page -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const lightbox = GLightbox({
+        selector: '.glightbox'
+    });
+});
+</script>
