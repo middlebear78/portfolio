@@ -14,6 +14,8 @@ class Project(models.Model):
     tags = models.ManyToManyField(Tag, related_name="projects")
     link = models.URLField(max_length=200, blank=True)
     github_url = models.URLField(max_length=200, blank=True)
+    slogan = models.CharField(max_length=50, default="Details in the Links")
+
 
     def __str__(self):
         return self.title
