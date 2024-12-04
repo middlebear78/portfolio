@@ -1,203 +1,128 @@
 {% load static %}
+
 <section id="portfolio" class="portfolio section">
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
         <h2>Portfolio</h2>
         <p>
-            Welcome to my portfolio. Explore my projects to see
-            how my skills can contribute to your team.
+            Welcome to my portfolio. Explore my projects to see how my skills can contribute to your team.
         </p>
     </div>
+    <!-- End Section Title -->
 
     <div class="container">
-        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-            <!-- Filter Controls -->
-            <div class="portfolio-controls" data-aos="fade-up" data-aos-delay="100">
-                <ul class="portfolio-filters isotope-filters">
-                    <li data-filter="*" class="filter-active">All</li>
-                    {% for tag in tags %}
-                    <li data-tag="{{ tag.name|lower }}" data-filter=".filter-{{ tag.name|slugify }}">{{ tag.name }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
+        <div
+            class="isotope-layout"
+            data-default-filter="*"
+            data-layout="masonry"
+            data-sort="original-order"
+        >
+            <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+                <!-- Mobile Tags -->
+                <li data-filter="*" class="mobile-only filter-active">All</li>
+                <li data-filter=".filter-python" class="mobile-only">Python</li>
+                <li data-filter=".filter-react" class="mobile-only">React</li>
+                <li data-filter=".filter-javascript" class="mobile-only">JavaScript</li>
+                <li data-filter=".filter-django" class="mobile-only">Django</li>
 
-            <!-- Portfolio Grid -->
+                <!-- Desktop Tags -->
+                <li data-filter="*" class="desktop-only filter-active">All</li>
+                {% for tag in tags %}
+                <li data-filter=".filter-{{ tag.name|slugify }}" class="desktop-only">{{ tag.name }}</li>
+                {% endfor %}
+            </ul>
+
+            <style>
+                .portfolio-filters {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 12px;
+                    justify-content: center;
+                }
+
+                .portfolio-filters li {
+                    padding: 8px 20px;
+                    border-radius: 25px;
+                    background-color: #f8f9fa;
+                    color: #555;
+                    font-weight: 500;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    border: 2px solid transparent;
+                }
+
+                .portfolio-filters li:hover {
+                    background-color: #e9ecef;
+                    transform: translateY(-2px);
+                }
+
+                .portfolio-filters li.filter-active {
+                    background-color: #4e6bff;
+                    color: white;
+                }
+
+                .mobile-only {
+                    display: none !important;
+                }
+
+                @media (max-width: 768px) {
+                    .mobile-only {
+                        display: inline-block !important;
+                    }
+                    .desktop-only {
+                        display: none !important;
+                    }
+                    .portfolio-filters {
+                        gap: 8px;
+                    }
+                    .portfolio-filters li {
+                        padding: 6px 16px;
+                        font-size: 0.9rem;
+                    }
+                }
+            </style>
+            <!-- End Portfolio Filters -->
+
             <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
                 {% for project in projects %}
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item 
-                            {% for tag in project.tags.all %}filter-{{ tag.name|slugify }} {% endfor %}"
-                    data-tags="{{ project.tags.all|join:', '|lower }}">
-                    <div class="portfolio-card">
-                        <div class="image-container">
-                            {% if project.random_image %}
-                            <img src="{{ project.random_image.image.url }}"
-                                class="img-fluid"
-                                alt="{{ project.title }}"
-                                loading="lazy"
-                            />
-                            {% else %}
-                            <img src="{% static 'img/image-placeholder.png' %}"
-                                class="img-fluid"
-                                alt="Project placeholder image"
-                                loading="lazy"
-                            />
-                            {% endif %}
-
-                            <div class="portfolio-info">
-                                <h4>{{ project.title }}</h4>
-                            </div>
-                        </div>
-
-                        <div class="portfolio-links">
-                            <a href="{{ project.github_url }}"
-                               target="_blank"
-                               title="View Project on GitHub"
-                               class="preview-link">
-                                <i class="bi bi-github"></i>
-                            </a>
-                            <a href="{% url 'project' project.id %}" 
-                               title="View Project Details" 
-                               class="details-link">
-                                <i class="bi bi-link-45deg"></i>
-                            </a>
-                        </div>
+                <div
+                    class="col-lg-4 col-md-6 portfolio-item isotope-item {% for tag in project.tags.all %}filter-{{ tag.name|slugify }} {% endfor %}"
+                >
+                    {% if project.random_image %}
+                    <img src="{{ project.random_image.image.url }}" class="img-fluid" alt="" />
+                    {% else %}
+                    <img src="{% static 'assets/img/image-placeholder.png' %}" class="img-fluid" alt="" />
+                    {% endif %}
+                    <div class="portfolio-info">
+                        <h4>{{ project.title }}</h4>
+                        {% if project.slogan %}
+                        <p>{{project.slogan}}</p>
+                        {% endif %} {% if project.random_image %}
+                        <a
+                            href="{{ project.random_image.image.url }}"
+                            title="{{ project.title }}"
+                            data-gallery="portfolio-gallery-{{ project.tags.first.name|slugify }}"
+                            class="glightbox preview-link"
+                            ><i class="bi bi-zoom-in"></i
+                        ></a>
+                        {% else %}
+                        <a
+                            href="{% static 'img/masonry-portfolio/masonry-portfolio-1.jpg' %}"
+                            title="{{ project.title }}"
+                            data-gallery="portfolio-gallery-{{ project.tags.first.name|slugify }}"
+                            class="glightbox preview-link"
+                            ><i class="bi bi-zoom-in"></i
+                        ></a>
+                        {% endif %}
+                        <a href="{% url 'project' project.id %}" title="More Details" class="details-link"
+                            ><i class="bi bi-link-45deg"></i
+                        ></a>
                     </div>
                 </div>
+                <!-- End Portfolio Item -->
                 {% endfor %}
             </div>
+            <!-- End Portfolio Container -->
         </div>
     </div>
 </section>
-
-<style>
-    /* Card Container */
-    .portfolio-card {
-        position: relative;
-        border-radius: 0.5rem;
-        overflow: hidden;
-        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-        transition: transform 0.3s ease;
-        background-color: white;
-        display: flex;
-        flex-direction: column;
-    }
-
-    /* Image Section */
-    .image-container {
-        position: relative;
-        height: 300px;
-        overflow: hidden;
-    }
-
-    .portfolio-card img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    /* Hover Info Section */
-    .portfolio-info {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 60px;
-        background: rgba(255, 255, 255, 0.95);
-        transform: translateY(100%);
-        transition: transform 0.3s ease;
-        border-radius: 0 0 0.3rem 0.3rem ;  /* Added this line */
-    }
-
-    .portfolio-card:hover .portfolio-info {
-        transform: translateY(0);
-    }
-
-    .portfolio-info h4 {
-        margin: 0;
-        padding: 1rem 1rem 1rem 2.5rem;  /* Changed padding-left to 2rem */
-        font-size: 1.125rem;
-        color: #000000 !important;
-        font-weight: 600;
-    }
-
-    /* Links Section */
-    .portfolio-links {
-        padding: 1.5rem;
-        display: flex;
-        justify-content: center;
-        gap: 3rem;
-        background: white;
-        border-top: 1px solid #e5e7eb;
-    }
-
-    .portfolio-links a {
-        width: 3rem;
-        height: 3rem;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #f8fafc;
-        color: #0f172a;
-        transition: all 0.3s ease;
-    }
-
-    .portfolio-links a i {
-        font-size: 1rem;
-    }
-
-    .portfolio-links a:hover {
-        background-color: #2563eb;
-        color: white;
-        transform: scale(1.1);
-    }
-
-    /* Filter Controls */
-    .portfolio-controls {
-        margin-bottom: 2rem;
-        display: flex;
-        justify-content: center;
-    }
-
-    .portfolio-filters {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        justify-content: center;
-    }
-
-    .portfolio-filters li {
-        padding: 0.5rem 1rem;
-        border-radius: 0.25rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .portfolio-filters li:hover,
-    .portfolio-filters li.filter-active {
-        background-color: #2563eb;
-        color: white;
-    }
-</style>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const searchInput = document.getElementById("name-search");
-        const portfolioItems = document.querySelectorAll(".portfolio-item");
-
-        searchInput.addEventListener("input", function (e) {
-            const searchTerm = e.target.value.toLowerCase();
-
-            portfolioItems.forEach((item) => {
-                const projectName = item.dataset.name;
-                const projectTags = item.dataset.tags;
-                const matchesSearch = projectName.includes(searchTerm) || projectTags.includes(searchTerm);
-
-                item.style.display = matchesSearch ? "block" : "none";
-            });
-        });
-    });
-</script>

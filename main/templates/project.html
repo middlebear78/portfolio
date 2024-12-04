@@ -1,134 +1,286 @@
-{% extends 'index.html' %}
 {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>{{ project.title }} - Portfolio Details</title>
+        <meta content="" name="description" />
+        <meta content="" name="keywords" />
 
-{% block title %}Portfolio Details{% endblock %}
-{% block body_class %}portfolio-details-page{% endblock %}
+        <!-- Favicons -->
+        <link href="{% static 'img/favicon-32x32.png' %}" rel="icon" />
+        {% comment %} <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon" /> {% endcomment %}
 
-{% block content %}
-<!-- Page Title -->
-<div class="page-title" data-aos="fade">
-    <div class="container">
-        <nav class="breadcrumbs">
-            <ol>
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li class="current">Portfolio Details</li>
-            </ol>
-        </nav>
-        <h1>Portfolio Details</h1>
-    </div>
-</div>
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com" rel="preconnect" />
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet"
+        />
 
-<!-- Portfolio Details Section -->
-<section id="portfolio-details" class="portfolio-details">
-    <div class="container" data-aos="fade-up">
-        <div class="portfolio-details-slider swiper">
-            <div class="swiper-wrapper align-items-center">
-                {% for image in project.images.all %}
-                <div class="swiper-slide">
-                    <img src="{{ image.image.url }}" alt="">
+        <!-- Vendor CSS Files -->
+        <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+        <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet" />
+        <link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet" />
+        <link href="{% static 'vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet" />
+        <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet" />
+
+        <!-- Main CSS File -->
+        <link href="{% static 'css/main.css' %}" rel="stylesheet" />
+    </head>
+
+    <body class="portfolio-details-page">
+        <header id="header" class="header d-flex flex-column justify-content-center">
+            <i class="header-toggle d-xl-none bi bi-list"></i>
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li>
+                        <a href="{% url 'home' %}#hero"><i class="bi bi-house navicon"></i><span>Home</span></a>
+                    </li>
+                    <li>
+                        <a href="{% url 'home' %}#about"><i class="bi bi-person navicon"></i><span>About</span></a>
+                    </li>
+                    <li>
+                        <a href="{% url 'home' %}#portfolio" class="active"
+                            ><i class="bi bi-images navicon"></i><span>Portfolio</span></a
+                        >
+                    </li>
+                    <li>
+                        <a href="{% url 'home' %}#skills"><i class="bi bi-keyboard navicon"></i><span>Skills</span></a>
+                    </li>
+                    <li>
+                        <a href="{% url 'home' %}#contact"
+                            ><i class="bi bi-envelope navicon"></i><span>Contact</span></a
+                        >
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="main">
+            <div class="page-title" data-aos="fade">
+                <div class="container">
+                    <nav class="breadcrumbs">
+                        <ol>
+                            <li><a href="{% url 'home' %}">Home</a></li>
+                            <li class="current">{{ project.title }}</li>
+                        </ol>
+                    </nav>
+                    <h1>{{ project.title }}</h1>
                 </div>
-                {% endfor %}
-            </div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-pagination"></div>
-        </div>
-
-        <div class="row justify-content-between gy-4">
-            <div class="col-lg-8">
-                <div class="portfolio-description">
-                    <h2>{{ project.title }}</h2>
-                    <p>{{ project.description }}</p>
-                </div>
             </div>
 
-            <div class="col-lg-3">
-                <div class="portfolio-info">
-                    <h3>Project information</h3>
-                    <ul>
-                        <li>
-                            <strong>Category</strong>
-                            <div class="mt-2">
-                                {% for tag in project.tags.all %}
-                                <span class="badge bg-light-subtle text-secondary me-1 mb-1" 
-                                      style="font-size: 12px; padding: 6px 12px; border-radius: 20px; border: 1px solid #dee2e6;">
-                                    {{ tag.name }}
-                                </span>
-                                {% endfor %}
+            <section id="portfolio-details" class="portfolio-details section">
+                <div class="container" data-aos="fade-up">
+                    <div class="portfolio-details-slider swiper init-swiper">
+                        <script type="application/json" class="swiper-config">
+                            {
+                                "loop": true,
+                                "speed": 600,
+                                "autoplay": {
+                                    "delay": 5000
+                                },
+                                "slidesPerView": "auto",
+                                "navigation": {
+                                    "nextEl": ".swiper-button-next",
+                                    "prevEl": ".swiper-button-prev"
+                                },
+                                "pagination": {
+                                    "el": ".swiper-pagination",
+                                    "type": "bullets",
+                                    "clickable": true
+                                }
+                            }
+                        </script>
+                        <div class="swiper-wrapper align-items-center">
+                            {% for image in project.images.all %}
+                            <div class="swiper-slide">
+                                <img src="{{ image.image.url }}" alt="{{ project.title }}" />
                             </div>
-                        </li>
-                        <li><strong>Github Link</strong> <a href="{{ project.link }}">{{ project.link }}</a></li>
-                        <li><a href="{{ project.link }}" class="btn-visit align-self-start">Visit Website</a></li>
-                    </ul>
+                            {% endfor %}
+                        </div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+
+                    <div class="row justify-content-between gy-4 mt-4">
+                        <div class="col-lg-8" data-aos="fade-up">
+                            <div class="portfolio-description">
+                                <h2>{{ project.title }}</h2>
+                                {{ project.description|safe }} {% if project.testimonial %}
+                                <div class="testimonial-item">
+                                    <p>
+                                        <i class="bi bi-quote quote-icon-left"></i>
+                                        <span>{{ project.testimonial.content }}</span>
+                                        <i class="bi bi-quote quote-icon-right"></i>
+                                    </p>
+                                    <div>
+                                        <img
+                                            src="{{ project.testimonial.image.url }}"
+                                            class="testimonial-img"
+                                            alt="{{ project.testimonial.name }}"
+                                        />
+                                        <h3>{{ project.testimonial.name }}</h3>
+                                        <h4>{{ project.testimonial.position }}</h4>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                            <div class="portfolio-info">
+                                <h3>Project information</h3>
+                                <ul>
+                                    <li>
+                                        <strong>Category</strong>
+                                        <div class="tag-container">
+                                            {% for tag in project.tags.all %}
+                                            <span class="project-tag">{{ tag.name }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    </li>
+                                    {% if project.github_url %}
+                                    <li>
+                                        <strong>Github Link</strong>
+                                        <a href="{{ project.github_url }}" target="_blank" class="github-link">
+                                            <i class="bi bi-github"></i>
+                                            <span>View Code</span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                    {% if project.link %}
+                                    <li class="website-button-container">
+                                        <a href="{{ project.link }}" class="btn-visit" target="_blank">Visit Website</a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+
+                            <style>
+                                .project-tag {
+                                    display: inline-block;
+                                    background-color: #f5f5f5;;
+                                    color: #666666;
+                                    padding: 4px 12px;
+                                    border-radius: 15px;
+                                    font-size: 0.85rem;
+                                    margin: 3px;
+                                    transition: all 0.3s ease;
+                                }
+
+                                .project-tag:hover {
+                                    background-color: #4a4a4a;
+                                    color: white;
+                                    transform: translateY(-2px);
+                                }
+
+                                .tag-container {
+                                    margin-top: 5px;
+                                    display: flex;
+                                    flex-wrap: wrap;
+                                    gap: 5px;
+                                }
+
+                                .github-link {
+                                    display: inline-flex;
+                                    align-items: center;
+                                    gap: 8px;
+                                    color: #666666;;
+                                    text-decoration: none;
+                                    padding: 5px 10px;
+                                    border-radius: 6px;
+                                    transition: all 0.3s ease;
+                                    background-color:#f5f5f5;
+                                }
+
+                                .github-link:hover {
+                                    background-color: #4a4a4a;
+                                    color: white;
+                                    transform: translateY(-2px);
+                                }
+
+                                .github-link i {
+                                    font-size: 1.2rem;
+                                }
+
+                                .portfolio-info ul li {
+                                    padding: 12px 0;
+                                    border-bottom: 1px solid #eee;
+                                }
+
+                                .portfolio-info ul li strong {
+                                    display: block;
+                                    font-weight: 600;
+                                    color: #444;
+                                    margin-bottom: 5px;
+                                }
+                                .website-button-container {
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    padding: 10px 0;
+                                }
+                            
+                                .btn-visit {
+                                    margin: 0 auto;
+                                }
+                            </style>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer id="footer" class="footer position-relative light-background">
+            <div class="container">
+                <h3 class="sitename">Uri Tal-Shamir</h3>
+                <p>
+                    Aspiring full-stack developer currently focusing on web development and cloud technologies. Building
+                    my skills through hands-on projects...
+                </p>
+                <div class="social-links d-flex justify-content-center">
+                    <a href="https://www.facebook.com/uri.shamir1" target="_blank" rel="noopener noreferrer"
+                        ><i class="bi bi-facebook"></i
+                    ></a>
+                    <a href="https://github.com/middlebear78" target="_blank" rel="noopener noreferrer"
+                        ><i class="bi bi-github"></i
+                    ></a>
+                    <a href="https://www.linkedin.com/in/uri-shamir/" target="_blank" rel="noopener noreferrer"
+                        ><i class="bi bi-linkedin"></i
+                    ></a>
+                </div>
+                <div class="container">
+                    <div class="copyright">
+                        <span>Copyright</span> <strong class="px-1 sitename">Uri Shamir</strong>
+                        <span>All Rights Reserved</span>
+                    </div>
+                    <div class="credits">Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a></div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
+        </footer>
 
-<!-- Styles -->
-<style>
-    /* Container styles */
-    .portfolio-details-slider {
-        margin-bottom: 30px;
-        width: 100%;
-        /* Set a specific height for the slider container */
-        height: 600px; /* Adjust this value based on your needs */
-    }
+        <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"
+            ><i class="bi bi-arrow-up-short"></i
+        ></a>
+        <div id="preloader"></div>
 
-    /* Wrapper styles */
-    .swiper-wrapper {
-        height: 100%;
-    }
+        <!-- Vendor JS Files -->
+        <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'vendor/aos/aos.js' %}"></script>
+        <script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
+        <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
+        <script src="{% static 'vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+        <script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
+        <script src="{% static 'vendor/purecounter/purecounter_vanilla.js' %}"></script>
+        <script src="{% static 'vendor/waypoints/noframework.waypoints.js' %}"></script>
+        <script src="{% static 'vendor/typed.js/typed.umd.js' %}"></script>
+        <script src="{% static 'vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
 
-    /* Slide styles */
-    .swiper-slide {
-        height: 100%;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* Image styles */
-    .portfolio-details .portfolio-details-slider img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain; /* Changed from 'cover' to 'contain' */
-        max-height: 600px; /* Match container height */
-    }
-    
-    .swiper-button-next,
-    .swiper-button-prev {
-        color: #000;
-    }
-    
-    .swiper-pagination-bullet {
-        background-color: #000;
-    }
-</style>
-
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const swiper = new Swiper(".portfolio-details-slider", {
-            speed: 400,
-            loop: true,
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: ".swiper-pagination",
-                type: "bullets",
-                clickable: true,
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
-        });
-    });
-</script>
-{% endblock %}
+        <!-- Main JS File -->
+        <script src="{% static 'js/main.js' %}"></script>
+    </body>
+</html>
